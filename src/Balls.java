@@ -37,19 +37,19 @@ public class Balls {
                 if(count>1){
                     x=balls.get(i).getX();
                     y=balls.get(i).getY();
-                    for (int j = 0; j <count ; j++) {
+                    for (int j = 0; j <2 ; j++) {
                         temp = new Ball(x,y,count);
                         balls.add(temp);
                         x+=count;
                     }
                 }
-                for (int j = i; j <balls.size() ; j++) {
+                for (int j = i; j <balls.size()-1 ; j++) {
                     balls.set(j,balls.get(i+1));
                 }
                 //balls.set(i,null);
 
             }
-            //balls.get(i).makeNew=false;
+
         }
     }
 

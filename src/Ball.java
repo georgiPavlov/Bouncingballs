@@ -15,17 +15,11 @@ public class Ball {
 
 
     public Ball() {
-        body =new LinkedList<>();
-        Collections.addAll(body,
-                new Box(13, 15),
-                new Box(13, 16),
-                new Box(12, 15),
-                new Box(12, 16)
-        );
+      makeBall();
     }
 
     public void drawBall(Graphics g){
-        int count = (int)Math.sqrt(body.size());
+        //int count = (int)Math.sqrt(body.size());
         for (Box box: body){
             g.setColor(Color.red);
             g.fillOval(box.x * box.BOX_SIZE, box.y * box.BOX_SIZE,
@@ -65,11 +59,21 @@ public class Ball {
                       body.set(i, temp);
 
         }
+        if(body.contains(Shell.shell)){
+            Game.gameRunning=false;
+          makeBall();
+        }
         //System.out.println("I am here");
               temp3 = body;
+    }
 
-
-
-
+    public void makeBall(){
+        body =new LinkedList<>();
+        Collections.addAll(body,
+                new Box(13, 15),
+                new Box(13, 16),
+                new Box(12, 15),
+                new Box(12, 16)
+        );
     }
 }

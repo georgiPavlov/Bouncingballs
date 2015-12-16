@@ -22,8 +22,8 @@ public class Ball {
     }
     public Ball(int x,int y,int countMake){
         List<Box> newBody= new ArrayList<>();
-        for (int i = 0; i < countMake; i++) {
-            for (int j = 0; j < countMake; j++) {
+        for (int i = 0; i < countMake/2; i++) {
+            for (int j = 0; j < countMake/2; j++) {
                 newBody.add(new Box(x+j,y+i));
             }
         }
@@ -90,7 +90,7 @@ public class Ball {
 
         }
         if(body.contains(Shell.shell)){
-            Game.gameRunning=false;
+            //Game.gameRunning=false;
             makeNew=true;
         }else if(body.contains(Player.box)){
             Game.gameRunning=false;

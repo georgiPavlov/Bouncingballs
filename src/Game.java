@@ -38,8 +38,8 @@ public class Game extends Canvas implements Runnable{
         g.clearRect(0,0,WIDTH*2,HEIGHT*2);
         player.drawPlayer(g);
         shell.drawShell(g);
-        ball.drawBall(g);
-        //balls.drawBalls(g);
+        //ball.drawBall(g);
+        balls.drawBalls(g);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class Game extends Canvas implements Runnable{
             if(shell.startShell) {
                 shell.tick();
             }
-            ball.tick();
-            //balls.tick();
+            //ball.tick();
+            balls.tick();
             render(globalGraphics);
             try {
                 Thread.sleep(500);

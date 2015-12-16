@@ -32,6 +32,7 @@ public class Balls {
                 balls.get(i).tick();
             }
             if(balls.get(i).makeNew){
+                balls.get(i).makeNew=false;
                 count = balls.get(i).returnSize();
                 if(count>1){
                     x=balls.get(i).getX();
@@ -42,9 +43,13 @@ public class Balls {
                         x+=count;
                     }
                 }
-                balls.set(i,null);
+                for (int j = i; j <balls.size() ; j++) {
+                    balls.set(j,balls.get(i+1));
+                }
+                //balls.set(i,null);
+
             }
-            balls.get(i).makeNew=false;
+            //balls.get(i).makeNew=false;
         }
     }
 

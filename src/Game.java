@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable{
     public static Player player;
     public static Shell shell;
     public static Ball ball;
+    public static Balls balls;
 
     public void paint(Graphics g){
         globalGraphics=g.create();
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable{
        player = new Player();
         shell =new Shell();
         ball  = new Ball();
+        balls = new Balls();
 
     }
 
@@ -37,6 +39,7 @@ public class Game extends Canvas implements Runnable{
         player.drawPlayer(g);
         shell.drawShell(g);
         ball.drawBall(g);
+        //balls.drawBalls(g);
     }
 
     @Override
@@ -47,6 +50,7 @@ public class Game extends Canvas implements Runnable{
                 shell.tick();
             }
             ball.tick();
+            //balls.tick();
             render(globalGraphics);
             try {
                 Thread.sleep(500);

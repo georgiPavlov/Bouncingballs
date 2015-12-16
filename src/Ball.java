@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,19 +8,45 @@ import java.util.List;
  * Created by georgipavlov on 14.12.15.
  */
 public class Ball {
-    public static List<Box> body;
-    public static List<Ball> balls;
-    public static List<Box> temp3;
-    public static boolean reverse1=false;
-    public static boolean reverse2=false;
-
+    public  List<Box> body;
+    public  List<Box> temp3;
+    public  boolean reverse1=false;
+    public  boolean reverse2=false;
+    public   boolean makeNew =false;
+    public static  int countNewBalls;
+    int count;
+    int ycount;
 
     public Ball() {
       makeBall();
     }
+    public Ball(int x,int y,int countMake){
+        List<Box> newBody= new ArrayList<>();
+        for (int i = 0; i < countMake; i++) {
+            for (int j = 0; j < countMake; j++) {
+                newBody.add(new Box(x+j,y+i));
+            }
+        }
+        countNewBalls++;
+        body = newBody;
+        count = (int)Math.sqrt(body.size());
+        ycount =(int)Math.sqrt(body.size());
+        if(countNewBalls %2 == 0){
+            count = -count;
+        }
+
+    }
+
+    public int getX(){
+        return body.get(0).x;
+    }
+
+    public int getY(){
+        return body.get(0).y;
+    }
 
     public void drawBall(Graphics g){
-        //int count = (int)Math.sqrt(body.size());
+
         for (Box box: body){
             g.setColor(Color.red);
             g.fillOval(box.x * box.BOX_SIZE, box.y * box.BOX_SIZE,
@@ -27,9 +54,13 @@ public class Ball {
         }
     }
 
+    public int returnSize(){
+        return (int)Math.sqrt(body.size());
+    }
+
     public  void tick(){
-        int count = -(int)Math.sqrt(body.size());
-        int ycount =(int)Math.sqrt(body.size());
+        int count = this.count;
+        int ycount = this.ycount;
         if(reverse1){
             count  = -count;
         }
@@ -37,22 +68,21 @@ public class Ball {
             ycount=-ycount;
         }
         Box temp;
-
         for (int i = 0; i < body.size(); i++) {
-                  temp = body.get(i);
+            temp = body.get(i);
                   if (temp.x + count > 30 || temp.x + count <0  ){
                       reverse1 = !reverse1;
                       System.out.println(reverse1);
                       body = temp3;
                       System.out.println(" 1 x= " + temp.x + "y= " + temp.y);
-                      return;
+                      tick();
                   }
                   if(temp.y + ycount > 30 || temp.y + ycount < 0){
                       reverse2 = !reverse2;
                       System.out.println(reverse2);
                       body = temp3;
                       System.out.println(" 2 x= " + temp.x + "y= " + temp.y);
-                      return;
+                      tick();
                   }
                   temp.x = temp.x + count;
                   temp.y = temp.y + ycount;
@@ -61,10 +91,11 @@ public class Ball {
         }
         if(body.contains(Shell.shell)){
             Game.gameRunning=false;
-          makeBall();
+            makeNew=true;
         }
         //System.out.println("I am here");
               temp3 = body;
+
     }
 
     public void makeBall(){
@@ -75,5 +106,8 @@ public class Ball {
                 new Box(12, 15),
                 new Box(12, 16)
         );
+         count = (int)Math.sqrt(body.size());
+         ycount =(int)Math.sqrt(body.size());
+
     }
 }

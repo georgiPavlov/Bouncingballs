@@ -33,10 +33,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void render(Graphics g){
-        g.clearRect(player.old.x*player.old.BOX_SIZE,
-                player.old.y*player.old.BOX_SIZE,
-                player.old.BOX_SIZE,player.old.BOX_SIZE);
-        g.clearRect(0,0,WIDTH,HEIGHT);
+        g.clearRect(0,0,WIDTH*2,HEIGHT*2);
         player.drawPlayer(g);
         shell.drawShell(g);
         ball.drawBall(g);
@@ -52,11 +49,11 @@ public class Game extends Canvas implements Runnable{
             ball.tick();
             render(globalGraphics);
             try {
-                Thread.sleep(175);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("job!");
+           // System.out.println("job!");
         }
 
     }

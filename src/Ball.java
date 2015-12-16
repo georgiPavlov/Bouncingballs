@@ -92,6 +92,8 @@ public class Ball {
         if(body.contains(Shell.shell)){
             Game.gameRunning=false;
             makeNew=true;
+        }else if(body.contains(Player.box)){
+            Game.gameRunning=false;
         }
         //System.out.println("I am here");
               temp3 = body;
